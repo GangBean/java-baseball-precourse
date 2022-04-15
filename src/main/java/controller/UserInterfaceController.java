@@ -1,4 +1,4 @@
-package userinterface;
+package controller;
 
 import camp.nextstep.edu.missionutils.Console;
 
