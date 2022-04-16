@@ -3,6 +3,8 @@ package judge;
 import ball.Ball;
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.Arrays;
+
 public class Judge {
     private static final int BALL_COUNT = 3;
     private static final int MAX_BALL_NUMBER = 9;
@@ -24,8 +26,20 @@ public class Judge {
     public void createNumber(){
         this.balls = new int[BALL_COUNT];
         for (int i = 0; i < BALL_COUNT; i++) {
-            this.balls[i] = Randoms.pickNumberInRange( MIN_BALL_NUMBER, MAX_BALL_NUMBER );
+            this.balls[i] = pickExclusiveNumber();
         }
+    }
+
+    private int pickExclusiveNumber(){
+        int number = Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER);
+        while( this.checkInclusive( number ) ) {
+            number = Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER);
+        }
+        return number;
+    }
+
+    private boolean checkInclusive( int number ){
+        return Arrays.asList(balls).contains(number);
     }
 
     private static void validateNumberFormat( String input ){
@@ -73,14 +87,6 @@ public class Judge {
             this.judgeStrike( ball );
             this.judgeBall( ball );
         }
-    }
-
-    public int getBallCount() {
-        return ballCount;
-    }
-
-    public int getStrikeCount() {
-        return strikeCount;
     }
 
     private void judgeStrike( Ball ball ) {
