@@ -15,8 +15,6 @@ public class GamePlayController {
             judge = new Judge();
             playBall();
             exit = userInterfaceController.replay();
-            System.out.println(exit);
-            System.out.println( "after end" );
         }
     }
 
@@ -24,7 +22,6 @@ public class GamePlayController {
         boolean exit = false;
         while( !exit ) {
             String input = userInterfaceController.enterNumber();
-            System.out.println(input);
             String output = judge.judge( input );
             userInterfaceController.judgeCall( output );
             exit = END_CALL.equals( output );
