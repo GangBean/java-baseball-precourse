@@ -39,7 +39,11 @@ public class Judge {
     }
 
     private boolean checkInclusive( int number ){
-        return Arrays.asList(balls).contains(number);
+        boolean isIn = false;
+        for(int ball : balls){
+            isIn = isIn|(number == ball);
+        }
+        return isIn;
     }
 
     private static void validateNumberFormat( String input ){
@@ -79,7 +83,7 @@ public class Judge {
         }
         this.ballCount = 0;
         this.strikeCount = 0;
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 
     private void judgeBalls( Ball[] balls ){
