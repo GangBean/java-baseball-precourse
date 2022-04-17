@@ -9,8 +9,8 @@ public class Ball {
     private int idx;
 
     public Ball(int number, int idx) {
-        validateNumberRange( number );
-        validateIndexRange( idx );
+        validateNumberRange(number);
+        validateIndexRange(idx);
         this.number = number;
         this.idx = idx;
     }
@@ -23,15 +23,15 @@ public class Ball {
         return idx;
     }
 
-    private static void validateNumberRange(int number ){
-        if( number < MIN_BALL_NUMBER || number > MAX_BALL_NUMBER ){
-            throw new IllegalArgumentException( "Out of number range" );
+    private static void validateNumberRange(int number) {
+        if (number < MIN_BALL_NUMBER || number > MAX_BALL_NUMBER) {
+            throw new IllegalArgumentException("Out of number range");
         }
     }
 
-    private static void validateIndexRange( int idx ){
-        if( idx < MIN_INDEX_NUMBER || idx > MAX_INDEX_NUMBER ){
-            throw new IllegalArgumentException( "Out of index range" );
+    private static void validateIndexRange(int idx) {
+        if (idx < MIN_INDEX_NUMBER || idx > MAX_INDEX_NUMBER) {
+            throw new IllegalArgumentException("Out of index range");
         }
     }
 }
