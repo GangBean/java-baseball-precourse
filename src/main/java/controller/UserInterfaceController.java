@@ -2,6 +2,8 @@ package controller;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Pattern;
+
 public class UserInterfaceController {
     public UserInterfaceController() {
     }
@@ -21,7 +23,12 @@ public class UserInterfaceController {
 
     public String replay() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        return Console.readLine();
+        String input = Console.readLine();
+        while (!Pattern.matches("^[1,2]$", input)) {
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            input = Console.readLine();
+        }
+        return input;
     }
 
 }
