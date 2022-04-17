@@ -3,7 +3,7 @@ package judge;
 import ball.Ball;
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class Judge {
     private static final int BALL_COUNT = 3;
@@ -19,7 +19,7 @@ public class Judge {
 
     private static void validateNumberLength( String input ){
         if( input.length() != BALL_COUNT ){
-            throw new IllegalArgumentException("Not enough length");
+            throw new IllegalArgumentException( "Input length must be " + BALL_COUNT );
         }
     }
 
@@ -47,13 +47,7 @@ public class Judge {
     }
 
     private static void validateNumberFormat( String input ){
-        for( char number: input.toCharArray() ){
-            validateEachNumberFormat(number);
-        }
-    }
-
-    private static void validateEachNumberFormat( char number ){
-        if( number < '0' || number > '9'){
+        if( !Pattern.matches( "^[1-9]*$", input ) ){
             throw new IllegalArgumentException( "Not a number format input" );
         }
     }
@@ -75,15 +69,28 @@ public class Judge {
         if( this.ballCount == 0 && this.strikeCount == 0 ){
             stringBuilder.append( "낫싱" );
         }
-        if( this.ballCount > 0 ){
-            stringBuilder.append( this.ballCount ).append("볼").append(" ");
-        }
-        if( this.strikeCount > 0 ){
-            stringBuilder.append( this.strikeCount ).append("스트라이크");
-        }
+        stringBuilder.append(ballCall());
+        stringBuilder.append(strikeCall());
+
         this.ballCount = 0;
         this.strikeCount = 0;
         return stringBuilder.toString().trim();
+    }
+
+    private String strikeCall(){
+        StringBuilder stringBuilder = new StringBuilder();
+        if( this.strikeCount > 0 ){
+            stringBuilder.append( this.strikeCount ).append("스트라이크");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String ballCall(){
+        StringBuilder stringBuilder = new StringBuilder();
+        if( this.ballCount > 0 ){
+            stringBuilder.append( this.ballCount ).append("볼").append(" ");
+        }
+        return stringBuilder.toString();
     }
 
     private void judgeBalls( Ball[] balls ){
